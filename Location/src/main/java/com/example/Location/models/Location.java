@@ -58,7 +58,7 @@ public class Location {
     @Override
     public String toString() {
         // TODO Auto-generated method stub
-        return "Admin{" +
+        return "Location{" +
                 "id= " + Id +
                 ",Address= " + Address +
                 ",Wards= " + Wards +

@@ -1,47 +1,43 @@
 package com.example.Location.controllers;
 
+import com.example.Location.models.Detail;
 import com.example.Location.models.Location;
-
 import com.example.Location.models.ResponseObject;
+import com.example.Location.repositories.DetailRepository;
 import com.example.Location.repositories.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@RequestMapping("/locations")
-public class LocationController {
-
-   // @Autowired
-   // private Environment env;
+@RequestMapping("/Detail")
+public class DetailController {
 
     @Autowired
-    private LocationRepository locationRepositiry;
+    private DetailRepository detailRepository;
 
     //this request is :http://localhost:8081/locations/
 
 
     @GetMapping("")
-    public List<Location> getLocations() {
-        return locationRepositiry.findAll();
+    public List<Detail> getLocations() {
+        return detailRepository.findAll();
     }
 
     @PostMapping("/insert")
-    ResponseEntity<ResponseObject> insertLocation (@RequestBody Location newLocation){
+    ResponseEntity<ResponseObject> insertLocation (@RequestBody Detail newDetail){
         return ResponseEntity.status(HttpStatus.OK).body(
-                new ResponseObject("Ok", "Insert Location successfully", locationRepositiry.save(newLocation))
+                new ResponseObject("Ok", "Insert Detail successfully", detailRepository.save(newDetail))
         );
     }
     @DeleteMapping("delete/{id}")
     ResponseEntity<ResponseObject> deleteProduct(@PathVariable Long id) {
-        boolean exists = locationRepositiry.existsById(id);
+        boolean exists = detailRepository.existsById(id);
         if(exists) {
-            locationRepositiry.deleteById(id);
+            detailRepository.deleteById(id);
             return ResponseEntity.status(HttpStatus.OK).body(
                     new ResponseObject("ok", "Delete product successfully", "")
             );
@@ -50,8 +46,5 @@ public class LocationController {
                 new ResponseObject("failed", "Cannot find product to delete", "")
         );
     }
-
-
-
 
 }
