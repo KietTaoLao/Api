@@ -32,5 +32,25 @@ spring:
             predicates:
               - Path=/client/**
               - Method=GET
+          # Database Location
+          - id: Location-Service
+            uri: lb://Location-Service
+            predicates:
+              - Path=/content/**
+              - Method=GET,POST, PUT, DELETE
+          - id: Location-Service
+            uri: lb://Location-Service
+            predicates:
+              - Path=/locations/**
+              - Method=GET,POST, PUT, DELETE
+          - id: Location-Service
+            uri: lb://Location-Service
+            predicates:
+              - Path=/Detail/**
+              - Method=GET,POST, PUT, DELETE
+
+
+
+
 
 
