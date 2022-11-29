@@ -17,14 +17,20 @@ public class ContentController {
     @Autowired
     private ContentRepository contentRepository;
 
+    @CrossOrigin("http://localhost:3001")
     @GetMapping("")
-    public List<Content> getContent() {
-        return contentRepository.findAll();
+    public ResponseEntity<List<Content>> getContent() {
+        
+        return ResponseEntity.status(HttpStatus.OK).header("Access-Control-Allow-Origin","*").body(
+                contentRepository.findAll()
+        );
+
+
     }
 
     @PostMapping("/insert")
     ResponseEntity<ResponseObject> insertContent (@RequestBody Content newC){
-        return ResponseEntity.status(HttpStatus.OK).body(
+        return ResponseEntity.status(HttpStatus.OK).header("Access-Control-Allow-Origin","*").body(
                 new ResponseObject("Ok", "Insert Content successfully", contentRepository.save(newC))
         );
     }

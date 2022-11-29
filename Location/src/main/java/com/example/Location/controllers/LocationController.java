@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/locations")
+@CrossOrigin
 public class LocationController {
 
    // @Autowired
@@ -25,15 +26,17 @@ public class LocationController {
 
     //this request is :http://localhost:8081/locations/
 
-
+    @CrossOrigin("http://localhost:3001")
     @GetMapping("")
-    public List<Location> getLocations() {
-        return locationRepositiry.findAll();
+    public ResponseEntity<List<Location>> getLocations() {
+        return ResponseEntity.status(HttpStatus.OK).header("Access-Control-Allow-Origin", "*").body(
+                 locationRepositiry.findAll()
+        );
     }
 
     @PostMapping("/insert")
     ResponseEntity<ResponseObject> insertLocation (@RequestBody Location newLocation){
-        return ResponseEntity.status(HttpStatus.OK).body(
+        return ResponseEntity.status(HttpStatus.OK).header("Access-Control-Allow-Origin","*").body(
                 new ResponseObject("Ok", "Insert Location successfully", locationRepositiry.save(newLocation))
         );
     }

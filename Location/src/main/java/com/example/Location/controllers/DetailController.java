@@ -21,15 +21,18 @@ public class DetailController {
 
     //this request is :http://localhost:8081/locations/
 
-
+    @CrossOrigin("http://localhost:3001")
     @GetMapping("")
-    public List<Detail> getLocations() {
-        return detailRepository.findAll();
+    public ResponseEntity<List<Detail>> getLocations() {
+        return ResponseEntity.status(HttpStatus.OK).header("Access-Control-Allow-Origin","*").body(
+                 detailRepository.findAll()
+        );
+
     }
 
     @PostMapping("/insert")
     ResponseEntity<ResponseObject> insertLocation (@RequestBody Detail newDetail){
-        return ResponseEntity.status(HttpStatus.OK).body(
+        return ResponseEntity.status(HttpStatus.OK).header("Access-Control-Allow-Origin","*").body(
                 new ResponseObject("Ok", "Insert Detail successfully", detailRepository.save(newDetail))
         );
     }

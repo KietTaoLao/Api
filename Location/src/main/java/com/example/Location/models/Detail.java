@@ -21,15 +21,6 @@ public class Detail {
         Image = image;
     }
 
-
-    public void setIdDetail(Long idDetail) {
-        IdDetail = idDetail;
-    }
-    public Long getIdDetail() {
-        return IdDetail;
-    }
-
-
     public Integer getRooms() {
         return Rooms;
     }
@@ -38,6 +29,13 @@ public class Detail {
         Rooms = rooms;
     }
 
+
+    public Long getIdDetail() {
+        return IdDetail;
+    }
+    public void setIdDetail(Long idDetail) {
+        IdDetail = idDetail;
+    }
     public Integer getBedrooms() {
         return Bedrooms;
     }
@@ -45,6 +43,9 @@ public class Detail {
     public void setBedrooms(Integer bedrooms) {
         Bedrooms = bedrooms;
     }
+
+
+
 
     public Integer getBathrooms() {
         return Bathrooms;
@@ -54,6 +55,8 @@ public class Detail {
         Bathrooms = bathrooms;
     }
 
+
+
     public String getImage() {
         return Image;
     }
@@ -61,6 +64,7 @@ public class Detail {
     public void setImage(String image) {
         Image = image;
     }
+
 
     @Override
     public String toString() {

@@ -15,6 +15,7 @@ public class Content {
     private  String TypeOfRealEstase;
 
     private  String RentOfSell;
+    public Content(){};
 
     public Content( String description, int price, int priceIfRenting, String typeOfRealEstase, String rentOfSell){
         Description = description;
@@ -22,17 +23,6 @@ public class Content {
         PriceIfRenting = priceIfRenting;
         TypeOfRealEstase = typeOfRealEstase;
         RentOfSell = rentOfSell;
-    }
-
-    public Content(){};
-
-
-    public Long getIdContent() {
-        return IdContent;
-    }
-
-    public void setIdContent(Long idContent) {
-        IdContent = idContent;
     }
 
     public String getDescription() {
@@ -50,6 +40,14 @@ public class Content {
     public void setPrice(int price) {
         Price = price;
     }
+    public Long getIdContent() {
+        return IdContent;
+    }
+
+    public void setIdContent(Long idContent) {
+        IdContent = idContent;
+    }
+
 
     public int getPriceIfRenting() {
         return PriceIfRenting;
@@ -74,6 +72,9 @@ public class Content {
     public void setRentOfSell(String rentOfSell) {
         RentOfSell = rentOfSell;
     }
+
+
+
 
     @Override
     public String toString() {
