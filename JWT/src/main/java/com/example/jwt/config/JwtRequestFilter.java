@@ -34,31 +34,26 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         String jwtToken = null;
         // JWT Token is in the form "Bearer token". Remove Bearer word and get
         // only the Token
-        // JWT Token có dạng "Bearer token". Xóa từ Bearer và nhận
-        // chỉ Mã thông báo
         if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
             jwtToken = requestTokenHeader.substring(7);
             try {
                 username = jwtTokenUtil.getUsernameFromToken(jwtToken);
             } catch (IllegalArgumentException e) {
-                System.out.println("Unable(không thể) to get JWT Token");
+                System.out.println("Unable to get JWT Token");
             } catch (ExpiredJwtException e) {
-                System.out.println("JWT Token has expired(hết hạn )");
+                System.out.println("JWT Token has expired");
             }
         } else {
             logger.warn("JWT Token does not begin with Bearer String");
         }
 
         // Once we get the token validate it.
-        // Khi chúng tôi nhận được mã thông báo, xác thực nó.
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
             UserDetails userDetails = this.jwtUserDetailsService.loadUserByUsername(username);
 
             // if token is valid configure Spring Security to manually set
             // authentication
-            // nếu mã thông báo hợp lệ, hãy định cấu hình Bảo mật mùa xuân để đặt thủ công
-            // xác thực
             if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
 
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
@@ -68,10 +63,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 // After setting the Authentication in the context, we specify
                 // that the current user is authenticated. So it passes the
                 // Spring Security Configurations successfully.
-
-                // Sau khi đặt Xác thực trong ngữ cảnh, chúng tôi chỉ định
-                // mà người dùng hiện tại được xác thực. Vì vậy, nó vượt qua
-                // Cấu hình bảo mật mùa xuân thành công.
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             }
         }

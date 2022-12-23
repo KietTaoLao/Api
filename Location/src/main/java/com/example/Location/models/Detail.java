@@ -10,15 +10,14 @@ public class Detail {
     Integer Rooms;
     Integer Bedrooms;
     Integer Bathrooms;
-    String Image;
 
     public Detail(){}
 
-    public Detail(Integer rooms, Integer bedrooms, Integer bathrooms, String image) {
+    public Detail(Integer rooms, Integer bedrooms, Integer bathrooms) {
         Rooms = rooms;
         Bedrooms = bedrooms;
         Bathrooms = bathrooms;
-        Image = image;
+
     }
 
     public Integer getRooms() {
@@ -36,34 +35,21 @@ public class Detail {
     public void setIdDetail(Long idDetail) {
         IdDetail = idDetail;
     }
+
     public Integer getBedrooms() {
         return Bedrooms;
     }
-
     public void setBedrooms(Integer bedrooms) {
         Bedrooms = bedrooms;
     }
 
-
-
-
     public Integer getBathrooms() {
         return Bathrooms;
     }
-
     public void setBathrooms(Integer bathrooms) {
         Bathrooms = bathrooms;
     }
 
-
-
-    public String getImage() {
-        return Image;
-    }
-
-    public void setImage(String image) {
-        Image = image;
-    }
 
 
     @Override
@@ -74,7 +60,7 @@ public class Detail {
                 ",Rooms= " + Rooms +
                 ",Bedrooms= " + Bedrooms +
                 ",Bathrooms=  " + Bathrooms +
-                ",Image=  " + Image +
+               // ",Image=  " + Image +
                 "}";
     }
 
