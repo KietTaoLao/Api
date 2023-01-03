@@ -5,13 +5,12 @@ import com.example.Location.models.Location;
 import com.example.Location.models.ResponseObject;
 import com.example.Location.repositories.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/locations")
@@ -25,6 +24,15 @@ public class LocationController {
     private LocationRepository locationRepositiry;
 
     //this request is :http://localhost:8081/locations/
+
+    @CrossOrigin("http://localhost:3001")
+    @GetMapping("/{id}")
+    public ResponseEntity<Location> getLocationId(@PathVariable Long id) {
+
+        return ResponseEntity.status(HttpStatus.OK).header("Access-Control-Allow-Origin","*").body(
+                locationRepositiry.findById(id).get()
+        );
+    }
 
     @CrossOrigin("http://localhost:3001")
     @GetMapping("")
@@ -45,11 +53,11 @@ public class LocationController {
         boolean exists = locationRepositiry.existsById(id);
         if(exists) {
             locationRepositiry.deleteById(id);
-            return ResponseEntity.status(HttpStatus.OK).body(
+            return ResponseEntity.status(HttpStatus.OK).header("Access-Control-Allow-Origin","*").body(
                     new ResponseObject("ok", "Delete product successfully", "")
             );
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).header("Access-Control-Allow-Origin","*").body(
                 new ResponseObject("failed", "Cannot find product to delete", "")
         );
     }

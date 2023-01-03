@@ -34,8 +34,18 @@ public class DetailController {
         this.imagesRepository = imagesRepository;
     }
 
+    @CrossOrigin("http://localhost:3001")
+    @GetMapping("/images")
+    public ResponseEntity<List<Images>> getAll1() {
+        return ResponseEntity.status(HttpStatus.OK).header("Access-Control-Allow-Origin","*").body(
+                imagesRepository.findAll()
+        );
 
-    @GetMapping("/ListImage/{id}")
+    }
+
+
+
+    @GetMapping("/{id}")
     public ResponseEntity<DetailView> getDetail(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).header("Access-Control-Allow-Origin","*").body(
                 detailService.getDetailView(id)
@@ -55,11 +65,11 @@ public class DetailController {
         boolean exists = imagesRepository.existsById(id);
         if(exists) {
             imagesRepository.deleteById(id);
-            return ResponseEntity.status(HttpStatus.OK).body(
+            return ResponseEntity.status(HttpStatus.OK).header("Access-Control-Allow-Origin","*").body(
                     new ResponseObject("ok", "Delete product successfully", "")
             );
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).header("Access-Control-Allow-Origin","*").body(
                 new ResponseObject("failed", "Cannot find product to delete", "")
         );
     }
@@ -86,11 +96,11 @@ public class DetailController {
         boolean exists = detailRepository.existsById(id);
         if(exists) {
             detailRepository.deleteById(id);
-            return ResponseEntity.status(HttpStatus.OK).body(
+            return ResponseEntity.status(HttpStatus.OK).header("Access-Control-Allow-Origin","*").body(
                     new ResponseObject("ok", "Delete product successfully", "")
             );
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).header("Access-Control-Allow-Origin","*").body(
                 new ResponseObject("failed", "Cannot find product to delete", "")
         );
     }

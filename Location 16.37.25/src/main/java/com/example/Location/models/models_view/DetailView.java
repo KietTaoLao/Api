@@ -1,10 +1,11 @@
 
 package com.example.Location.models.models_view;
 
+import com.example.Location.models.Detail;
+
 import java.util.List;
 
 public class DetailView {
-
 
     Long IdDetail;
     Integer Rooms;
@@ -12,6 +13,19 @@ public class DetailView {
     Integer Bathrooms;
     List<String> Image;
 
+    Long LocationId;
+
+    public DetailView(Detail detail,List<String> images){
+        setLocationId(detail.getLocationId());
+        setRooms(detail.getRooms());
+        setBedrooms(detail.getBedrooms());
+        setBathrooms(detail.getBathrooms());
+        setImage(images);
+
+    }
+    public DetailView(){
+
+    }
     public Long getIdDetail() {
         return IdDetail;
     }
@@ -50,6 +64,14 @@ public class DetailView {
 
     public void setImage(List<String> image) {
         Image = image;
+    }
+
+    public Long getLocationId() {
+        return LocationId;
+    }
+
+    public void setLocationId(Long locationId) {
+        LocationId = locationId;
     }
 }
 

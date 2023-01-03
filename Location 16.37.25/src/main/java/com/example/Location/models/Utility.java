@@ -1,12 +1,16 @@
 package com.example.Location.models;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.*;
 @Entity
-public class utility {
+public class Utility {
 
     @Id
-    private Long idUtility;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private Integer Pool;
     private Integer Garage;
     private Integer Backyard;
@@ -24,10 +28,11 @@ public class utility {
     private Integer Elevator;
     private Integer Wifi;
 
-    public  utility(){}
+    private  Long LocationId;
+    public Utility(){}
 
-    public utility(Long idUtility, Integer pool, Integer garage, Integer backyard, Integer playground, Integer laundry, Integer gym, Integer recreationRoom, Integer kitchenEquipment, Integer solarPower, Integer airConditioning, Integer heater, Integer ventilation, Integer washerDryer, Integer smokeExtractor, Integer elevator, Integer wifi) {
-        idUtility = idUtility;
+    public Utility(Long id, Integer pool, Integer garage, Integer backyard, Integer playground, Integer laundry, Integer gym, Integer recreationRoom, Integer kitchenEquipment, Integer solarPower, Integer airConditioning, Integer heater, Integer ventilation, Integer washerDryer, Integer smokeExtractor, Integer elevator, Integer wifi, Long locationId) {
+        this.id = id;
         Pool = pool;
         Garage = garage;
         Backyard = backyard;
@@ -44,14 +49,15 @@ public class utility {
         SmokeExtractor = smokeExtractor;
         Elevator = elevator;
         Wifi = wifi;
+        LocationId = locationId;
     }
 
-    public Long getIdUtility() {
-        return idUtility;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdUtility(Long idUtility) {
-        this.idUtility = idUtility;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Integer getPool() {
@@ -182,11 +188,19 @@ public class utility {
         Wifi = wifi;
     }
 
+    public Long getLocationId() {
+        return LocationId;
+    }
+
+    public void setLocationId(Long locationId) {
+        LocationId = locationId;
+    }
+
     @Override
     public String toString() {
         // TODO Auto-generated method stub
         return "utility{" +
-                "id= " + idUtility +
+                "id= " + id +
                 ",Pool= " + Pool +
                 ",Garage= " + Garage +
                 ",Backyard=  " + Backyard +

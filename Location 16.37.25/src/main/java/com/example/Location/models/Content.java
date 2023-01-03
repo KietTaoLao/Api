@@ -1,14 +1,14 @@
 package com.example.Location.models;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Content {
 
     @Id
-     private  Long IdContent;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+     private  Long id;
 
     private String Title;
 
@@ -25,10 +25,12 @@ public class Content {
      private int Area;
 
      private String Path;
+     @Column(name = "LocationId")
+     private Long LocationId;
     public Content(){};
 
-    public Content(Long idContent, String title, String description, int price, int priceIfRenting, String selectHome, String selectBuy, int area, String path) {
-        IdContent = idContent;
+    public Content(Long id, String title, String description, int price, int priceIfRenting, String selectHome, String selectBuy, int area, String path,Long LocationId) {
+        this.id = id;
         Title = title;
         Description = description;
         Price = price;
@@ -37,14 +39,15 @@ public class Content {
         SelectBuy = selectBuy;
         Area = area;
         Path = path;
+        this.LocationId = LocationId;
     }
 
-    public Long getIdContent() {
-        return IdContent;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdContent(Long idContent) {
-        IdContent = idContent;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -111,11 +114,19 @@ public class Content {
         Path = path;
     }
 
+    public Long getLocationId() {
+        return LocationId;
+    }
+
+    public void setLocationId(Long locationId) {
+        LocationId = locationId;
+    }
+
     @Override
     public String toString() {
         // TODO Auto-generated method stub
         return "Content{" +
-                "IdContent= " + IdContent +
+                "IdContent= " + id +
                 ",Title= " + Title +
                 ",Description= " + Description +
                 ",Price= " + Price +
@@ -124,6 +135,7 @@ public class Content {
                 ",SelectBuy=  " + SelectBuy +
                 ",Area=  " + Area +
                 ",Path=  " + Path +
+                ",LocationId= "+ LocationId +
                 "}";
     }
 

@@ -4,23 +4,33 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Location {
     //this is "primary key"
     @Id
-  //  @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long Id;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long LocationId;
     private String Address;
     private String Wards;
     private String City;
 
     public  Location(){}
 
-    public Location(String address, String wards, String city) {
-       Address = address;
-       Wards = wards;
-       City = city;
+    public Location(Long locationId, String address, String wards, String city) {
+        this.LocationId = locationId;
+        Address = address;
+        Wards = wards;
+        City = city;
+    }
+
+    public Long getId() {
+        return LocationId;
+    }
+
+    public void setId(Long id) {
+        this.LocationId = id;
     }
 
     public String getAddress() {
@@ -47,19 +57,14 @@ public class Location {
         City = city;
     }
 
-    public Long getId() {
-        return Id;
-    }
 
-    public void setId(Long id) {
-        this.Id = id;
-    }
+
 
     @Override
     public String toString() {
         // TODO Auto-generated method stub
         return "Location{" +
-                "id= " + Id +
+                "LocationsId= " + LocationId +
                 ",Address= " + Address +
                 ",Wards= " + Wards +
                 ",City=  " + City +
